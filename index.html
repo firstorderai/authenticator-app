@@ -30,7 +30,7 @@
       }
 
       .download-section {
-        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        background: linear-gradient(135deg, #f3f4f6 0%, #f1f5f9 100%);
       }
     </style>
   </head>
@@ -101,11 +101,18 @@
           <!-- Application Screenshot -->
           <div class="flex justify-center">
             <div class="w-full max-w-2xl">
-              <img
-                src="assets/images/winauth-screenshot-7eca46.png"
-                alt="WinAuth Application Screenshot"
-                class="w-full h-auto rounded-lg shadow-lg border border-gray-200"
-              />
+              <div class="relative flex justify-center items-center">
+                <img
+                  src="assets/images/windows-app-light.png"
+                  alt="Authenticator App Screenshot (Light)"
+                  class="w-1/2 h-auto relative z-10 translate-x-24 translate-y-8"
+                />
+                <img
+                  src="assets/images/windows-app-dark.png"
+                  alt="Authenticator App Screenshot (Dark)"
+                  class="w-1/2 h-auto relative z-0 -translate-x-24 -translate-y-8"
+                />
+              </div>
             </div>
           </div>
 
@@ -132,7 +139,12 @@
           <!-- Download Description -->
           <div>
             <p class="text-base text-gray-600">
-              Download the latest stable version of Authenticator App.
+              <a
+                href="https://s3.us-east-1.amazonaws.com/firstorder.public/app/authenticator_setup.exe"
+                class="text-blue-600 hover:text-blue-800 underline"
+                >Download</a
+              >
+              the latest stable version of Authenticator App.
             </p>
           </div>
 
@@ -152,9 +164,9 @@
           <!-- Steam Confirmations Screenshot -->
           <div class="flex justify-center">
             <img
-              src="assets/images/steam-confirmations-7eca46.png"
-              alt="WinAuth Trading Confirmations Feature"
-              class="w-full max-w-2xl h-auto rounded-lg shadow-md border border-gray-200"
+              src="assets/images/app_on_desktop_mobile.png"
+              alt="Authenticator Apps on Desktop and Mobile"
+              class="w-full max-w-2xl h-auto rounded-lg"
             />
           </div>
         </div>
