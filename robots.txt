@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://your-username.github.io/authenticator-app/sitemap.xml
+Sitemap: https://firstorderai.github.io/authenticator-app/sitemap.xml
 
 # Disallow reference directory
 Disallow: /reference/
