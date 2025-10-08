@@ -1,34 +1,560 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Authenticator App</title>
-    <style>
-      body {
-        font-family: Arial;
-        margin: 40px;
-        background: #f6f6f6;
-      }
-      .container {
-        max-width: 800px;
-        margin: auto;
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-      }
-      h1 {
-        color: #3366cc;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Authenticator App for Windows - Secure Two-Factor Authentication Tool
+    </title>
+    <meta
+      name="description"
+      content="Professional Windows authenticator app supporting Google Authenticator, Microsoft Authenticator and other two-factor authentication services to protect your account security."
+    />
+    <meta
+      name="keywords"
+      content="Windows authenticator,two-factor authentication,2FA,Google Authenticator,Microsoft Authenticator,account security"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://your-username.github.io/authenticator-app/"
+    />
+    <meta
+      property="og:title"
+      content="Authenticator App for Windows - Secure Two-Factor Authentication Tool"
+    />
+    <meta
+      property="og:description"
+      content="Professional Windows authenticator app supporting multiple two-factor authentication services to protect your account security."
+    />
+    <meta
+      property="og:image"
+      content="https://your-username.github.io/authenticator-app/assets/images/og-image.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://your-username.github.io/authenticator-app/"
+    />
+    <meta
+      property="twitter:title"
+      content="Authenticator App for Windows - Secure Two-Factor Authentication Tool"
+    />
+    <meta
+      property="twitter:description"
+      content="Professional Windows authenticator app supporting multiple two-factor authentication services to protect your account security."
+    />
+    <meta
+      property="twitter:image"
+      content="https://your-username.github.io/authenticator-app/assets/images/og-image.png"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                200: '#bfdbfe',
+                300: '#93c5fd',
+                400: '#60a5fa',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                800: '#1e40af',
+                900: '#1e3a8a',
+              },
+              secondary: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+              },
+              accent: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                200: '#bae6fd',
+                300: '#7dd3fc',
+                400: '#38bdf8',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+                800: '#075985',
+                900: '#0c4a6e',
+              },
+            },
+            fontFamily: {
+              sans: [
+                'Inter',
+                'system-ui',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Segoe UI',
+                'Roboto',
+                'sans-serif',
+              ],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="assets/css/custom.css" />
+
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="assets/js/main.js" as="script" />
   </head>
-  <body>
-    <div class="container">
-      <h1>Authenticator App for Windows</h1>
-      <p>Secure your accounts with our 2FA Authenticator.</p>
-      <h2>Download</h2>
-      <ul>
-        <li><a href="#">Windows</a></li>
-      </ul>
-    </div>
+  <body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300"
+    >
+      <div class="container-custom">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <a href="#" class="flex items-center space-x-2">
+              <div
+                class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <span class="text-xl font-bold text-gray-900">Authenticator</span>
+            </a>
+          </div>
+
+          <!-- Desktop Navigation Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#screenshots" class="nav-link">Screenshots</a>
+            <a href="download.html" class="nav-link">Download</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+
+          <!-- 移动端菜单按钮 -->
+          <button
+            id="nav-toggle"
+            class="md:hidden p-2 rounded-lg text-gray-600 hover:text-primary-600 hover:bg-gray-100"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div
+          id="nav-menu"
+          class="hidden md:hidden bg-white rounded-lg shadow-lg mt-2 p-4"
+        >
+          <div class="flex flex-col space-y-2">
+            <a href="#features" class="nav-link py-2">Features</a>
+            <a href="#screenshots" class="nav-link py-2">Screenshots</a>
+            <a href="download.html" class="nav-link py-2">Download</a>
+            <a href="#contact" class="nav-link py-2">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="pt-16 pb-20 bg-gradient-to-br from-primary-600 via-primary-700 to-accent-600"
+    >
+      <div class="container-custom">
+        <div class="text-center text-white">
+          <h1 class="mb-6 animate-slide-up">
+            Secure and Reliable
+            <span class="text-gradient">Windows Authenticator</span>
+          </h1>
+          <p
+            class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto animate-fade-in"
+          >
+            Professional two-factor authentication tool supporting Google
+            Authenticator, Microsoft Authenticator and other services, providing
+            bank-level security for your accounts.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in"
+          >
+            <a href="download.html" class="download-btn">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+              <span>Download Now</span>
+            </a>
+            <a
+              href="#features"
+              class="btn-secondary text-white border-white hover:bg-white hover:text-primary-600"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+      <div class="container-custom">
+        <div class="text-center mb-16">
+          <h2 class="mb-4">Why Choose Our Authenticator?</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            We provide the most secure and user-friendly two-factor
+            authentication solution to make your digital life safer.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature Card 1 -->
+          <div class="feature-card animate-on-scroll">
+            <div class="card-body text-center">
+              <div class="feature-icon mx-auto">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Bank-Level Security</h3>
+              <p class="text-gray-600">
+                Uses industry-standard encryption algorithms to ensure your
+                verification codes are secure and reliable, preventing account
+                theft.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Card 2 -->
+          <div class="feature-card animate-on-scroll">
+            <div class="card-body text-center">
+              <div class="feature-icon mx-auto">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Lightning Fast Sync</h3>
+              <p class="text-gray-600">
+                Real-time time synchronization ensures accurate verification
+                codes with support for multiple time servers.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Card 3 -->
+          <div class="feature-card animate-on-scroll">
+            <div class="card-body text-center">
+              <div class="feature-icon mx-auto">
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Easy to Use</h3>
+              <p class="text-gray-600">
+                Intuitive user interface with one-click account addition, QR
+                code scanning support, and simple operation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="py-20 bg-gray-50">
+      <div class="container-custom">
+        <div class="text-center mb-16">
+          <h2 class="mb-4">App Interface Preview</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Clean and beautiful interface design that makes it easy to manage
+            all your two-factor authentication accounts.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="animate-on-scroll">
+            <div class="bg-white rounded-2xl shadow-strong p-8">
+              <div class="bg-gray-100 rounded-lg p-4 mb-6">
+                <div class="bg-white rounded p-4 shadow-sm">
+                  <div class="flex items-center justify-between mb-4">
+                    <h4 class="font-semibold">My Accounts</h4>
+                    <span class="text-sm text-gray-500">3 accounts</span>
+                  </div>
+                  <div class="space-y-3">
+                    <div
+                      class="flex items-center justify-between p-3 bg-gray-50 rounded"
+                    >
+                      <div class="flex items-center space-x-3">
+                        <div
+                          class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                        >
+                          G
+                        </div>
+                        <span class="font-medium">Google</span>
+                      </div>
+                      <span class="font-mono text-lg">123 456</span>
+                    </div>
+                    <div
+                      class="flex items-center justify-between p-3 bg-gray-50 rounded"
+                    >
+                      <div class="flex items-center space-x-3">
+                        <div
+                          class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold"
+                        >
+                          M
+                        </div>
+                        <span class="font-medium">Microsoft</span>
+                      </div>
+                      <span class="font-mono text-lg">789 012</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll">
+            <h3 class="text-2xl font-bold mb-4">
+              Intuitive Account Management
+            </h3>
+            <p class="text-gray-600 mb-6">
+              Clearly displays all added accounts with real-time verification
+              codes, supporting quick copy and auto-refresh.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-center space-x-3">
+                <svg
+                  class="w-5 h-5 text-green-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span
+                  >Supports all mainstream two-factor authentication
+                  services</span
+                >
+              </li>
+              <li class="flex items-center space-x-3">
+                <svg
+                  class="w-5 h-5 text-green-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span>Automatic time synchronization ensures accuracy</span>
+              </li>
+              <li class="flex items-center space-x-3">
+                <svg
+                  class="w-5 h-5 text-green-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span>One-click copy verification codes to clipboard</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download CTA Section -->
+    <section class="py-20 bg-primary-600">
+      <div class="container-custom text-center text-white">
+        <h2 class="mb-4">Start Protecting Your Accounts Now</h2>
+        <p class="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+          Download our Windows authenticator and enjoy a secure and convenient
+          two-factor authentication experience.
+        </p>
+        <a
+          href="download.html"
+          class="download-btn bg-white text-primary-600 hover:bg-gray-100"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            ></path>
+          </svg>
+          <span>Free Download</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+      <div class="container-custom">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <div
+                class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <span class="text-xl font-bold">Authenticator</span>
+            </div>
+            <p class="text-gray-400">
+              Professional Windows two-factor authentication tool to protect
+              your digital security.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#features"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Features</a
+                >
+              </li>
+              <li>
+                <a
+                  href="download.html"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Download App</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#screenshots"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Screenshots</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Contact Us</h4>
+            <p class="text-gray-400 mb-2">
+              If you have any questions or suggestions, please feel free to
+              contact us
+            </p>
+            <p class="text-gray-400">support@authenticator-app.com</p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2024 Authenticator App. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
