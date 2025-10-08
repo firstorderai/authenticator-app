@@ -1,0 +1,27 @@
+{
+  "name": "authenticator-app-website",
+  "version": "1.0.0",
+  "description": "Authenticator App website - Windows 2FA Authentication",
+  "main": "index.html",
+  "scripts": {
+    "build-css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify",
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "build": "npm run build-css-prod",
+    "preview": "python3 -m http.server 8000",
+    "serve": "npm run build && npm run preview",
+    "deploy-check": "node deploy-check.js",
+    "deploy": "npm run build && npm run deploy-check"
+  },
+  "keywords": [
+    "authenticator",
+    "2fa",
+    "windows",
+    "security"
+  ],
+  "author": "FirstOrder.ai",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
