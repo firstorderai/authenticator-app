@@ -2,4 +2,3 @@ reference
 *.md
 .cursor
 node_modules/
-package-lock.json
