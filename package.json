@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build-css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
-    "build-css-prod": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify",
+    "build-css-prod": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css",
     "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
     "build": "npm run build-css-prod",
     "preview": "python3 -m http.server 8000",
